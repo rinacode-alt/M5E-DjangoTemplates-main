@@ -66,22 +66,18 @@
 </div>
 
 <script>
-  // Function to ensure only positive numbers are entered
   document.addEventListener("DOMContentLoaded", function () {
     const numberInputs = document.querySelectorAll('input[type="number"]');
 
     numberInputs.forEach((input) => {
-      // Set minimum value
       input.setAttribute("min", "0");
 
-      // Prevent negative values on input
       input.addEventListener("input", function (e) {
         if (this.value < 0 || this.value === "-") {
           this.value = 0;
         }
       });
 
-      // Prevent paste of negative values
       input.addEventListener("paste", function (e) {
         let pasteData = e.clipboardData.getData("text");
         if (parseFloat(pasteData) < 0 || pasteData.includes("-")) {
@@ -89,7 +85,6 @@
         }
       });
 
-      // Prevent the minus key
       input.addEventListener("keydown", function (e) {
         if (e.key === "-" || e.keyCode === 189) {
           e.preventDefault();

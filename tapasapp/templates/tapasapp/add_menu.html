@@ -29,20 +29,26 @@
                 <label for="cooking_time" class="form-label">Cook Time:</label>
                 <input
                   type="number"
+                  min="0"
                   class="form-control"
                   id="cooking_time"
                   name="cooking_time"
                   required
+                  onkeydown="return event.keyCode !== 189"
+                  oninput="this.value = this.value.replace('-', '')"
                 />
               </div>
               <div class="col-md-6">
                 <label for="prep_time" class="form-label">Prep Time:</label>
                 <input
                   type="number"
+                  min="0"
                   class="form-control"
                   id="prep_time"
                   name="prep_time"
                   required
+                  onkeydown="return event.keyCode !== 189"
+                  oninput="this.value = this.value.replace('-', '')"
                 />
               </div>
             </div>
@@ -58,4 +64,38 @@
     </div>
   </div>
 </div>
+
+<script>
+  // Function to ensure only positive numbers are entered
+  document.addEventListener("DOMContentLoaded", function () {
+    const numberInputs = document.querySelectorAll('input[type="number"]');
+
+    numberInputs.forEach((input) => {
+      // Set minimum value
+      input.setAttribute("min", "0");
+
+      // Prevent negative values on input
+      input.addEventListener("input", function (e) {
+        if (this.value < 0 || this.value === "-") {
+          this.value = 0;
+        }
+      });
+
+      // Prevent paste of negative values
+      input.addEventListener("paste", function (e) {
+        let pasteData = e.clipboardData.getData("text");
+        if (parseFloat(pasteData) < 0 || pasteData.includes("-")) {
+          e.preventDefault();
+        }
+      });
+
+      // Prevent the minus key
+      input.addEventListener("keydown", function (e) {
+        if (e.key === "-" || e.keyCode === 189) {
+          e.preventDefault();
+        }
+      });
+    });
+  });
+</script>
 {% endblock %}

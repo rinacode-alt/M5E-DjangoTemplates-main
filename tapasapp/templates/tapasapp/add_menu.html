@@ -1,46 +1,61 @@
-{% extends 'tapasapp/base.html' %}
+{% extends 'tapasapp/base.html' %} {% load static %} {% block sidebar %}
+<li class="nav-item">
+  <a class="nav-link active" href="{% url 'view_menu' %}"> Back to main </a>
+</li>
+{% endblock %} {% block content %}
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12">
+      <div class="card border-0">
+        <div class="card-body bg-light">
+          <h5 class="mb-3">Type in Dish Details:</h5>
 
-{% load static %}
+          <form method="POST">
+            {% csrf_token %}
 
-{% block sidebar %}
-    <nav id="sidebar" class="col-md-3 col-lg-2 d-md-block bg-light sidebar">
-        <div class="position-sticky">
-            <ul class="nav flex-column">
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'view_menu' %}">
-                        Back to Main
-                    </a>
-                </li>
-            </ul>
-        </div>
-    </nav>
-{% endblock %}
-
-{% block content %}
-<div class="container mt-5">
-    <h1 class="text-center mb-4 text-white">Add Menu</h1>
-    
-    <form method="POST">
-
-        <div class="mb-3">
-            <h3 class="text-black">Dish Name</h3>
-            <input type="text" class="form-control" id="dish_name" name="dish_name" placeholder="Enter dish name" required>
-        </div>
-
-        <div class="mb-3 row">
-            <div class="col-md-6">
-                <h3 class="text-black">Cooking Time (in minutes)</h3>
-                <input type="number" class="form-control" id="cooking_time" name="cooking_time" placeholder="Enter cooking time" required>
+            <div class="mb-3">
+              <label for="dish_name" class="form-label">Name:</label>
+              <input
+                type="text"
+                class="form-control"
+                id="dish_name"
+                name="dish_name"
+                required
+              />
             </div>
-            <div class="col-md-6">
-                <h3 class="text-black">Preparation Time</h3>
-                <input type="number" class="form-control" id="prep_time" name="prep_time" placeholder="Enter preparation time" required>
-            </div>
-        </div>
 
-        <div class="d-flex justify-content-center">
-            <button type="submit" class="btn btn-primary">Add Dish</button>
+            <div class="row mb-4">
+              <div class="col-md-6 mb-3 mb-md-0">
+                <label for="cooking_time" class="form-label">Cook Time:</label>
+                <input
+                  type="number"
+                  class="form-control"
+                  id="cooking_time"
+                  name="cooking_time"
+                  required
+                />
+              </div>
+              <div class="col-md-6">
+                <label for="prep_time" class="form-label">Prep Time:</label>
+                <input
+                  type="number"
+                  class="form-control"
+                  id="prep_time"
+                  name="prep_time"
+                  required
+                />
+              </div>
+            </div>
+
+            <div>
+              <button type="submit" class="btn btn-secondary">
+                Add to menu
+              </button>
+            </div>
+          </form>
         </div>
-    </form>
+      </div>
+    </div>
+  </div>
 </div>
 {% endblock %}

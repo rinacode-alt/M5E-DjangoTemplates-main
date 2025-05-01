@@ -17,35 +17,47 @@
       html,
       body {
         height: 100%;
+        margin: 0;
       }
+
       body {
         display: flex;
         flex-direction: column;
+        min-height: 100vh;
       }
+
       .content-wrapper {
-        flex: 1;
+        flex: 1 0 auto;
         display: flex;
         flex-direction: column;
       }
+
       .container-fluid {
         flex: 1;
       }
+
       .row {
         flex: 1;
       }
+
       .bg-custom {
         background-color: #590404 !important;
       }
+
       .sidebar {
         position: sticky;
         top: 56px;
         height: calc(100vh - 112px); /* Navbar and footer height */
         overflow-y: auto;
       }
+
       .footer {
+        flex-shrink: 0;
         padding: 1rem 0;
         color: white;
         text-align: center;
+        width: 100%;
+        margin-top: 2rem;
       }
     </style>
   </head>
@@ -66,7 +78,7 @@
             id="sidebar"
             class="col-md-3 col-lg-2 d-md-block bg-light sidebar"
           >
-            <div class="position-sticky">
+            <div class="position-sticky pt-3">
               <ul class="nav flex-column">
                 {% block sidebar %}
                 <li class="nav-item">
@@ -84,7 +96,7 @@
             </div>
           </nav>
 
-          <main class="col-md-9 ms-sm-auto col-lg-10 px-4">
+          <main class="col-md-9 ms-sm-auto col-lg-10 px-4 py-3">
             {% block content %} {% endblock %}
           </main>
         </div>
@@ -92,7 +104,11 @@
     </div>
 
     <footer class="footer bg-custom">
-      <div class="container">&copy; {% now "Y" %}</div>
+      <div
+        class="container-fluid d-flex justify-content-center align-items-center"
+      >
+        <small>&copy; 2020</small>
+      </div>
     </footer>
   </body>
 </html>
